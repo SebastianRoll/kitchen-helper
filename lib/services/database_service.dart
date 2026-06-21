@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:path/path.dart';
 import '../models/food_item.dart';
 import '../models/category.dart' as app_category;
@@ -12,6 +13,13 @@ class DatabaseService {
   List<app_category.Category>? _webCategories;
 
   bool get isWeb => kIsWeb;
+
+  DatabaseService() {
+    if (!isWeb && Platform.isLinux) {
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+    }
+  }
 
   Future<void> _initWebData() async {
     if (_webItems != null) return;
