@@ -8,18 +8,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => InventoryProvider()..loadItems()..loadCategories(),
-      child: const _HomeScreenContent(),
-    );
-  }
-}
-
-class _HomeScreenContent extends StatelessWidget {
-  const _HomeScreenContent();
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kitchen Helper'),
