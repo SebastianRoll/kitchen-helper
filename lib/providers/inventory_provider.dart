@@ -2,9 +2,15 @@ import 'package:flutter/foundation.dart';
 import '../models/food_item.dart';
 import '../models/category.dart' as app_category;
 import '../services/database_service.dart';
+import '../services/database_service.dart';
 
 class InventoryProvider extends ChangeNotifier {
   final DatabaseService _db = DatabaseService();
+
+  InventoryProvider() {
+    loadItems();
+    loadCategories();
+  }
 
   List<FoodItem> _items = [];
   List<app_category.Category> _categories = [];

@@ -1,14 +1,48 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import '../models/food_item.dart';
-import '../models/category.dart';
+import '../models/category.dart' as app_category;
 
 class DatabaseService {
   static Database? _database;
+  List<FoodItem>? _webItems;
+  List<app_category.Category>? _webCategories;
+
+  bool get isWeb => kIsWeb;
+
+  Future<void> _initWebData() async {
+    if (_webItems != null) return;
+
+    final jsonString = await rootBundle.loadString('assets/sample_data.json');
+    final data = json.decode(jsonString);
+
+    _webCategories = (data['categories'] as List)
+        .map((c) => app_category.Category.fromMap(c))
+        .toList();
+
+    _webItems = (data['food_items'] as List)
+        .map((item) => FoodItem(
+          id: item['id'],
+          name: item['name'],
+          category: item['category'],
+          storageLocation: item['storage_location'],
+          quantity: item['quantity'].toDouble(),
+          unit: item['unit'],
+          expiryDate: item['expiry_date'] != null
+              ? DateTime.parse(item['expiry_date'])
+              : null,
+          dateAdded: DateTime.parse(item['date_added']),
+          notes: item['notes'],
+          consumed: item['consumed'] ?? false,
+        ))
+        .toList();
+  }
 
   Future<Database> get database async {
+    if (isWeb) throw UnsupportedError('SQLite not supported on web');
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
@@ -51,7 +85,6 @@ class DatabaseService {
       )
     ''');
 
-    // Load sample data
     await _loadSampleData(db);
   }
 
@@ -59,12 +92,10 @@ class DatabaseService {
     final jsonString = await rootBundle.loadString('assets/sample_data.json');
     final data = json.decode(jsonString);
 
-    // Insert categories
     for (final cat in data['categories']) {
       await db.insert('categories', cat);
     }
 
-    // Insert food items
     for (final item in data['food_items']) {
       await db.insert('food_items', {
         'name': item['name'],
@@ -86,6 +117,32 @@ class DatabaseService {
     String? category,
     bool includeConsumed = false,
   }) async {
+    if (isWeb) {
+      await _initWebData();
+      var items = _webItems!;
+
+      if (!includeConsumed) {
+        items = items.where((i) => !i.consumed).toList();
+      }
+
+      if (storageLocation != null) {
+        items = items.where((i) => i.storageLocation == storageLocation).toList();
+      }
+
+      if (category != null) {
+        items = items.where((i) => i.category == category).toList();
+      }
+
+      items.sort((a, b) {
+        if (a.expiryDate == null && b.expiryDate == null) return 0;
+        if (a.expiryDate == null) return 1;
+        if (b.expiryDate == null) return -1;
+        return a.expiryDate!.compareTo(b.expiryDate!);
+      });
+
+      return items;
+    }
+
     final db = await database;
 
     String whereClause = '';
@@ -118,11 +175,23 @@ class DatabaseService {
   }
 
   Future<int> insertFoodItem(FoodItem item) async {
+    if (isWeb) {
+      await _initWebData();
+      final newId = (_webItems!.length + 1);
+      _webItems!.add(item.copyWith(id: newId));
+      return newId;
+    }
     final db = await database;
     return await db.insert('food_items', item.toMap());
   }
 
   Future<int> updateFoodItem(FoodItem item) async {
+    if (isWeb) {
+      await _initWebData();
+      final index = _webItems!.indexWhere((i) => i.id == item.id);
+      if (index >= 0) _webItems![index] = item;
+      return 1;
+    }
     final db = await database;
     return await db.update(
       'food_items',
@@ -133,6 +202,11 @@ class DatabaseService {
   }
 
   Future<int> deleteFoodItem(int id) async {
+    if (isWeb) {
+      await _initWebData();
+      _webItems!.removeWhere((i) => i.id == id);
+      return 1;
+    }
     final db = await database;
     return await db.delete(
       'food_items',
@@ -142,6 +216,14 @@ class DatabaseService {
   }
 
   Future<int> markAsConsumed(int id) async {
+    if (isWeb) {
+      await _initWebData();
+      final index = _webItems!.indexWhere((i) => i.id == id);
+      if (index >= 0) {
+        _webItems![index] = _webItems![index].copyWith(consumed: true);
+      }
+      return 1;
+    }
     final db = await database;
     return await db.update(
       'food_items',
@@ -152,39 +234,33 @@ class DatabaseService {
   }
 
   // Categories
-  Future<List<Category>> getCategories() async {
+  Future<List<app_category.Category>> getCategories() async {
+    if (isWeb) {
+      await _initWebData();
+      return _webCategories!;
+    }
     final db = await database;
     final maps = await db.query('categories');
-    return maps.map((map) => Category.fromMap(map)).toList();
+    return maps.map((map) => app_category.Category.fromMap(map)).toList();
   }
 
   // Stats
   Future<Map<String, int>> getItemCountsByLocation() async {
-    final db = await database;
-    final result = await db.rawQuery('''
-      SELECT storage_location, COUNT(*) as count 
-      FROM food_items 
-      WHERE consumed = 0 
-      GROUP BY storage_location
-    ''');
-
-    return {
-      for (var row in result)
-        row['storage_location'] as String: row['count'] as int
-    };
+    final items = await getFoodItems();
+    final counts = <String, int>{};
+    for (final item in items) {
+      counts[item.storageLocation] = (counts[item.storageLocation] ?? 0) + 1;
+    }
+    return counts;
   }
 
   Future<List<FoodItem>> getExpiringItems(int days) async {
-    final db = await database;
-    final cutoff = DateTime.now().add(Duration(days: days)).toIso8601String();
-
-    final maps = await db.query(
-      'food_items',
-      where: 'consumed = 0 AND expiry_date <= ? AND expiry_date >= ?',
-      whereArgs: [cutoff, DateTime.now().toIso8601String()],
-      orderBy: 'expiry_date ASC',
-    );
-
-    return maps.map((map) => FoodItem.fromMap(map)).toList();
+    final items = await getFoodItems();
+    final cutoff = DateTime.now().add(Duration(days: days));
+    return items.where((item) {
+      if (item.expiryDate == null) return false;
+      return item.expiryDate!.isBefore(cutoff) &&
+          item.expiryDate!.isAfter(DateTime.now());
+    }).toList();
   }
 }

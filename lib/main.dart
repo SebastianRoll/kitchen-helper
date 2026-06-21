@@ -13,7 +13,7 @@ class KitchenHelperApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => InventoryProvider()..loadItems()..loadCategories(),
+      create: (_) => InventoryProvider(),
       child: MaterialApp(
         title: 'Kitchen Helper',
         debugShowCheckedModeBanner: false,
