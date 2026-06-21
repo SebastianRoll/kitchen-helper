@@ -1,0 +1,44 @@
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets and local config
+*.env
+.env.local
+.env.*.local
+android/key.properties
+android/upload-keystore.jks
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
+
+# Database (keep sample data, exclude local DBs)
+*.db
+*.sqlite
+*.sqlite3
+
+# User data
+assets/user_data/
+assets/photos/
+
+# Coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.log

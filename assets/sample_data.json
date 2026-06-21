@@ -1,0 +1,328 @@
+{
+  "food_items": [
+    {
+      "id": 1,
+      "name": "Elgkjøttdeig",
+      "category": "Meat",
+      "storage_location": "freezer",
+      "quantity": 2.0,
+      "unit": "kg",
+      "expiry_date": "2026-12-31",
+      "date_added": "2026-06-20",
+      "notes": "Fryst ned i porsjoner",
+      "consumed": false
+    },
+    {
+      "id": 2,
+      "name": "Bringebær",
+      "category": "Fruit",
+      "storage_location": "freezer",
+      "quantity": 500,
+      "unit": "g",
+      "expiry_date": "2026-09-15",
+      "date_added": "2026-06-20",
+      "notes": "Fryst ferske",
+      "consumed": false
+    },
+    {
+      "id": 3,
+      "name": "Pinjekjerner",
+      "category": "Nuts",
+      "storage_location": "freezer",
+      "quantity": 200,
+      "unit": "g",
+      "expiry_date": "2027-01-01",
+      "date_added": "2026-06-20",
+      "notes": "I skuff 2, stor fryser",
+      "consumed": false
+    },
+    {
+      "id": 4,
+      "name": "Pinjekjerner",
+      "category": "Nuts",
+      "storage_location": "freezer",
+      "quantity": 150,
+      "unit": "g",
+      "expiry_date": "2027-02-01",
+      "date_added": "2026-06-20",
+      "notes": "I kjøleskap-fryser, midterste hylle",
+      "consumed": false
+    },
+    {
+      "id": 5,
+      "name": "Pinjekjerner",
+      "category": "Nuts",
+      "storage_location": "freezer",
+      "quantity": 100,
+      "unit": "g",
+      "expiry_date": "2027-03-01",
+      "date_added": "2026-06-20",
+      "notes": "I kjøleskap-fryser, nederste hylle",
+      "consumed": false
+    },
+    {
+      "id": 6,
+      "name": "Reker",
+      "category": "Seafood",
+      "storage_location": "freezer",
+      "quantity": 1.0,
+      "unit": "kg",
+      "expiry_date": "2026-08-31",
+      "date_added": "2026-06-20",
+      "notes": "Ferske frosne",
+      "consumed": false
+    },
+    {
+      "id": 7,
+      "name": "Bacon",
+      "category": "Meat",
+      "storage_location": "freezer",
+      "quantity": 500,
+      "unit": "g",
+      "expiry_date": "2026-10-15",
+      "date_added": "2026-06-20",
+      "notes": "Hel pakke",
+      "consumed": false
+    },
+    {
+      "id": 8,
+      "name": "Parmesan",
+      "category": "Dairy",
+      "storage_location": "fridge",
+      "quantity": 200,
+      "unit": "g",
+      "expiry_date": "2026-07-31",
+      "date_added": "2026-06-20",
+      "notes": "Åpnet, i osteskuff",
+      "consumed": false
+    },
+    {
+      "id": 9,
+      "name": "Egg",
+      "category": "Dairy",
+      "storage_location": "fridge",
+      "quantity": 12,
+      "unit": "pcs",
+      "expiry_date": "2026-07-15",
+      "date_added": "2026-06-15",
+      "notes": "Økologiske",
+      "consumed": false
+    },
+    {
+      "id": 10,
+      "name": "Melk",
+      "category": "Dairy",
+      "storage_location": "fridge",
+      "quantity": 1.0,
+      "unit": "l",
+      "expiry_date": "2026-06-28",
+      "date_added": "2026-06-18",
+      "notes": "Lettmelk",
+      "consumed": false
+    },
+    {
+      "id": 11,
+      "name": "Smør",
+      "category": "Dairy",
+      "storage_location": "fridge",
+      "quantity": 250,
+      "unit": "g",
+      "expiry_date": "2026-08-15",
+      "date_added": "2026-06-10",
+      "notes": "Saltet",
+      "consumed": false
+    },
+    {
+      "id": 12,
+      "name": "Ris",
+      "category": "Grains",
+      "storage_location": "dry",
+      "quantity": 2.0,
+      "unit": "kg",
+      "expiry_date": "2027-06-01",
+      "date_added": "2026-05-01",
+      "notes": "Jasmin ris",
+      "consumed": false
+    },
+    {
+      "id": 13,
+      "name": "Pasta",
+      "category": "Grains",
+      "storage_location": "dry",
+      "quantity": 500,
+      "unit": "g",
+      "expiry_date": "2027-05-01",
+      "date_added": "2026-05-15",
+      "notes": "Spaghetti",
+      "consumed": false
+    },
+    {
+      "id": 14,
+      "name": "Oliveolje",
+      "category": "Oils",
+      "storage_location": "dry",
+      "quantity": 750,
+      "unit": "ml",
+      "expiry_date": "2027-04-01",
+      "date_added": "2026-04-01",
+      "notes": "Extra virgin",
+      "consumed": false
+    },
+    {
+      "id": 15,
+      "name": "Hermetiske tomater",
+      "category": "Vegetables",
+      "storage_location": "dry",
+      "quantity": 3,
+      "unit": "pcs",
+      "expiry_date": "2027-12-31",
+      "date_added": "2026-03-01",
+      "notes": "Hakkede tomater",
+      "consumed": false
+    },
+    {
+      "id": 16,
+      "name": "Kyllingfilet",
+      "category": "Meat",
+      "storage_location": "fridge",
+      "quantity": 400,
+      "unit": "g",
+      "expiry_date": "2026-06-25",
+      "date_added": "2026-06-19",
+      "notes": "Fersk",
+      "consumed": false
+    },
+    {
+      "id": 17,
+      "name": "Salat",
+      "category": "Vegetables",
+      "storage_location": "fridge",
+      "quantity": 1,
+      "unit": "pcs",
+      "expiry_date": "2026-06-24",
+      "date_added": "2026-06-20",
+      "notes": "Isbergsalat",
+      "consumed": false
+    },
+    {
+      "id": 18,
+      "name": "Tomater",
+      "category": "Vegetables",
+      "storage_location": "fridge",
+      "quantity": 6,
+      "unit": "pcs",
+      "expiry_date": "2026-06-30",
+      "date_added": "2026-06-18",
+      "notes": "Cherry tomater",
+      "consumed": false
+    },
+    {
+      "id": 19,
+      "name": "Løk",
+      "category": "Vegetables",
+      "storage_location": "dry",
+      "quantity": 5,
+      "unit": "pcs",
+      "expiry_date": "2026-09-01",
+      "date_added": "2026-06-01",
+      "notes": "Gul løk",
+      "consumed": false
+    },
+    {
+      "id": 20,
+      "name": "Hvitløk",
+      "category": "Vegetables",
+      "storage_location": "dry",
+      "quantity": 2,
+      "unit": "pcs",
+      "expiry_date": "2026-12-01",
+      "date_added": "2026-05-15",
+      "notes": "",
+      "consumed": false
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Meat",
+      "icon": "restaurant",
+      "color": "#FF6B6B"
+    },
+    {
+      "id": 2,
+      "name": "Seafood",
+      "icon": "set_meal",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": 3,
+      "name": "Dairy",
+      "icon": "egg_alt",
+      "color": "#FFE66D"
+    },
+    {
+      "id": 4,
+      "name": "Vegetables",
+      "icon": "eco",
+      "color": "#95E1D3"
+    },
+    {
+      "id": 5,
+      "name": "Fruit",
+      "icon": "apple",
+      "color": "#F38181"
+    },
+    {
+      "id": 6,
+      "name": "Grains",
+      "icon": "grain",
+      "color": "#AA96DA"
+    },
+    {
+      "id": 7,
+      "name": "Nuts",
+      "icon": "nutrition",
+      "color": "#FCBAD3"
+    },
+    {
+      "id": 8,
+      "name": "Oils",
+      "icon": "opacity",
+      "color": "#A8D8EA"
+    }
+  ],
+  "recipes": [
+    {
+      "id": 1,
+      "name": "Elggryte med pinjekjerner",
+      "ingredients": ["Elgkjøttdeig", "Pinjekjerner", "Løk", "Hvitløk", "Hermetiske tomater"],
+      "instructions": "1. Brun kjøttdeig. 2. Tilsett løk og hvitløk. 3. Tilsett tomater. 4. La småkoke 30 min. 5. Topp med pinjekjerner.",
+      "prep_time": 45,
+      "difficulty": "Easy"
+    },
+    {
+      "id": 2,
+      "name": "Kyllingsalat",
+      "ingredients": ["Kyllingfilet", "Salat", "Tomater", "Parmesan", "Oliveolje"],
+      "instructions": "1. Stek kylling. 2. Skjær grønnsaker. 3. Bland sammen. 4. Drypp med olivenolje.",
+      "prep_time": 20,
+      "difficulty": "Easy"
+    },
+    {
+      "id": 3,
+      "name": "Rekepasta",
+      "ingredients": ["Reker", "Pasta", "Hvitløk", "Oliveolje", "Parmesan"],
+      "instructions": "1. Kok pasta. 2. Stek reker med hvitløk. 3. Bland sammen. 4. Topp med parmesan.",
+      "prep_time": 25,
+      "difficulty": "Easy"
+    },
+    {
+      "id": 4,
+      "name": "Risotto med bacon",
+      "ingredients": ["Ris", "Bacon", "Løk", "Parmesan", "Smør"],
+      "instructions": "1. Stek bacon. 2. Tilsett løk og ris. 3. Tilsett vann gradvis. 4. Rør inn parmesan og smør.",
+      "prep_time": 35,
+      "difficulty": "Medium"
+    }
+  ]
+}
