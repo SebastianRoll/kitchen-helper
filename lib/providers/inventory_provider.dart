@@ -1,19 +1,19 @@
 import 'package:flutter/foundation.dart';
 import '../models/food_item.dart';
-import '../models/category.dart';
+import '../models/category.dart' as app_category;
 import '../services/database_service.dart';
 
 class InventoryProvider extends ChangeNotifier {
   final DatabaseService _db = DatabaseService();
 
   List<FoodItem> _items = [];
-  List<Category> _categories = [];
+  List<app_category.Category> _categories = [];
   String? _selectedLocation;
   String? _selectedCategory;
   bool _isLoading = false;
 
   List<FoodItem> get items => _items;
-  List<Category> get categories => _categories;
+  List<app_category.Category> get categories => _categories;
   String? get selectedLocation => _selectedLocation;
   String? get selectedCategory => _selectedCategory;
   bool get isLoading => _isLoading;

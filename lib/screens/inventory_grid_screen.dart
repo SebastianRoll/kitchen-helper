@@ -144,7 +144,7 @@ class _FoodItemCard extends StatelessWidget {
       case 'grains':
         return Icons.grain;
       case 'nuts':
-        return Icons.nutrition;
+        return Icons.grain;
       default:
         return Icons.food_bank;
     }
